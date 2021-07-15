@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            display: block;
+            width: 296px;
+            height: 256px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<img data-src="./img/1.png" alt="">
+<img data-src="./img/2.png" alt="">
+<img data-src="./img/3.png" alt="">
+<img data-src="./img/4.png" alt="">
+<img data-src="./img/5.png" alt="">
+<img data-src="./img/6.png" alt="">
+<img data-src="./img/7.png" alt="">
+<img data-src="./img/8.png" alt="">
+<img data-src="./img/9.png" alt="">
+<img data-src="./img/10.png" alt="">
+<img data-src="./img/11.png" alt="">
+<img data-src="./img/12.png" alt="">
+<img data-src="./img/13.png" alt="">
+<img data-src="./img/14.png" alt="">
+
+<script>
+const log = console.log.bind(console)
+
+const es = (selector) => {
+    return Array.from(document.querySelectorAll(selector));
+}
+
+const img = es('img')
+
+// 监听回调
+const callback = (entries) => {
+    for (let i = 0; i < entries.length; i++) {
+        const ele = entries[i];
+        if (ele.intersectionRatio <= 0) {
+            return
+        }
+        let target = ele.target
+        target.src = target.dataset.src
+        observer.unobserve(target)
+    }
+}
+
+const observer = new IntersectionObserver(callback);
+
+// log(observer, 'observer')
+img.forEach(item => {
+    observer.observe(item);
+})
+
+    // var intersectionObserver = new IntersectionObserver(function(entries) {
+    //     // If intersectionRatio is 0, the target is out of view
+    //     // and we do not need to do anything.
+    //     if (entries[0].intersectionRatio <= 0) return;
+    //
+    //     loadItems(10);
+    //     console.log('Loaded new items');
+    // });
+    // // start observing
+    // intersectionObserver.observe(document.querySelector('.scrollerFooter'));
+</script>
+</body>
+</html>
